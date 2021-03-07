@@ -1,0 +1,35 @@
+#plot_image{
+    width: 600px;
+    height: 450px;
+    margin: 15px;
+}
+h2{
+    text-align: center;
+    margin: 0px;
+    padding-bottom: 0px;
+    color:#21468B;
+}
+
+h1{
+color:#21468B;
+}
+   
+.navbar .navbar-brand{
+   color: #21468B;
+   font-weight: 300;
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.navbar .nav-item .nav-link{
+   color: #21468B;
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+body{
+   background-color: lightgray;
+}
+.container{
+   background-color: white;
+}
+.navbar{
+   background-color: orangered;
+}

@@ -3,15 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Summary: Latitude vs. X</title>
+    <title>City Windspeed</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="vis_style.css">
+    <link rel="stylesheet" type="text/css" href="vis_style.css">
 </head>
 
 <body>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 
     <!-- NAVBAR CODE -->
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -42,22 +43,19 @@
         </div>
     </nav>
     <!-- END NAVBAR CODE -->
-    
 
-    <!-- Bootstrap Grid -->
     <div class="container">
         <div class="row">
             <div class="col col-12 col-md-8">
-                <h1 class="font-weight-bold ">Summary: Latitude vs. X</h1>
+                <h1>Windspeed</h1>
                 <hr>
-                <img  src="Resources/assets/images/Fig1.png" width="400" align="left" alt="Graph of city latitude vs max temperature."/></a>
-                <p class="text-justify">The aim of this project was to examine various weather factors in relation to city distance from the equator, as measured by latitude.
-                    Factors examined included city max temperature, humidity, cloudiness, and wind speed. Data was gathered using OpenWeatherMap API.
-                    Analysis was then performed on the data using Jupyter Notebooks in conjunction with Pandas. 
-                    Lastly, we used Matplotlib to generate plots, providing visualizations of the key findings. 
-                </p>   
-            </div>    
-
+                <img id="lat_wind" src="Resources/assets/images/Fig4.png" class="rounded mx-auto d-block img-fluid" alt="Graph of city latitude vs wind speed."/>
+                <p>
+                    Most data appears to be clustered in the 0 to 15 mph for max windspeed, regardless of latitude.
+                    There are some outliers in the Northern Hemisphere data, who have windspeed greater than 30 mph. 
+                    Further analysis would be needed to determine whether these are statistically significant. 
+                </p>
+            </div>
             <div class="col col-12 col-md-4">
                 <br>
                 <h2>Visualizations</h2>

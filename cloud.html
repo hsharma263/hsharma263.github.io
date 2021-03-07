@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Summary: Latitude vs. X</title>
+    <title>City Cloudiness</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="vis_style.css">
+    <link rel="stylesheet" type="text/css" href="vis_style.css">
 </head>
 
 <body>
@@ -42,22 +42,18 @@
         </div>
     </nav>
     <!-- END NAVBAR CODE -->
-    
 
-    <!-- Bootstrap Grid -->
     <div class="container">
         <div class="row">
             <div class="col col-12 col-md-8">
-                <h1 class="font-weight-bold ">Summary: Latitude vs. X</h1>
+                <h1>Cloudiness</h1>
                 <hr>
-                <img  src="Resources/assets/images/Fig1.png" width="400" align="left" alt="Graph of city latitude vs max temperature."/></a>
-                <p class="text-justify">The aim of this project was to examine various weather factors in relation to city distance from the equator, as measured by latitude.
-                    Factors examined included city max temperature, humidity, cloudiness, and wind speed. Data was gathered using OpenWeatherMap API.
-                    Analysis was then performed on the data using Jupyter Notebooks in conjunction with Pandas. 
-                    Lastly, we used Matplotlib to generate plots, providing visualizations of the key findings. 
-                </p>   
-            </div>    
-
+                    <img id="lat_cloud" src="Resources/assets/images/Fig3.png" class="rounded mx-auto d-block img-fluid" alt="Graph of city latitude vs cloudiness.">
+                    <p>The results are rather inconclusive for city latitude vs cloudiness. There are several cites, at all latitudes, which 0% cloudiness.
+                        However, as you travel towards the equator, as well as away from the equator, in both the Northern and Southern Hemispheres, there are sporadic data points. 
+                        Cities in the Northern Hemisphere, latitude 40 and greater, appear to be a bit cloudier as compared to other latitudes, however, more data is needed in order to obtain more conclusive results.
+                    </p>
+            </div>
             <div class="col col-12 col-md-4">
                 <br>
                 <h2>Visualizations</h2>
@@ -86,5 +82,3 @@
     </div>
 </body>
 </html>
-
-
