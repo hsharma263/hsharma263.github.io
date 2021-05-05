@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> Earthquake Analysis </title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <!-- NAVBAR CODE -->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="navbar-brand" href="index.html">Homepage</a>
+      </div>
+ 
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="nav-link"><a href="globe.html">Global Earthquakes<span class="sr-only">(current)</span></a></li>
+          <li><a href="depth_line_chart.html">Depth vs Magnitude</a></li>
+          <li><a href="magtype_funnelchart.html">Earthquakes by Magnitude Type</a></li>
+          <li><a href="statistics.html">Depth Predictor</a></li>
+        </ul>
+      </div>  
+    </div>  
+  </nav>
+
+  <!-- End navbar code -->
+  
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12 jumbotron text-center">
+        <h1>Earthquake Analysis Dashboard</h1>
+        <p>Select a Continent!</p>
+        <p>Enter any depth in km!</p>
+      </div>
+    </div>
+
+        <select name="contintent" id="continent">
+          <option value="Asia">Asia</option>
+          <option value="Africa">Africa</option>
+          <option value="North_America">North America</option>
+          <option value="South_America">South America</option>
+          <option value="Oceania">Oceania</option>
+          <option value="Europe">Europe</option>
+        </select>
+        <input name="depth" type="text">
+        <a href="/linregressor/0/5/Asia" id="submit"><button class="btn btn-primary btn-block btn-large">Button</button></a>
+
+{{ prediction_text }}
+
+  <!-- Required Dependencies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="../static/js/app.js"></script>
+  <script src="../Resources/Earthquakes.json"></script>
+  
+  <script>
+    //   on inputs change the href attributes of the anchor
+    am=0;
+    depth=5;
+    continent="Asia";
+    continents= d3.select("#continent")
+    continents.on("change", function(){
+        continent= continents.property("value")
+        // change next line to function
+        buttonLink = d3.select("#submit")
+        buttonLink.attr("href", `/linregressor/${am}/${depth}/${continent}`)
+    })
+  </script>
+
+</body>
+
+</html>

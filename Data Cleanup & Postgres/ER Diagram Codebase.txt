@@ -1,0 +1,38 @@
+earthquake
+-----
+id PK VARCHAR(50)
+type VARCHAR(50)
+depth FLOAT
+mag FLOAT
+magtype VARCHAR(20)
+rootmeansquare FLOAT
+status VARCHAR(30)
+-
+
+location
+-----
+id VARCHAR(50) FK >- Earthquake.id
+place VARCHAR(255)
+latitude FLOAT
+longitude FLOAT
+locationSource VARCHAR(20)
+city VARCHAR(50)
+county VARCHAR(50)
+state VARCHAR(50)
+country VARCHAR(50)
+mindepth FLOAT
+maxdepth FLOAT
+minmag FLOAT
+maxmag FLOAT
+count VARCHAR(50)
+mindate DATE
+maxdate DATE
+-
+
+time
+-----
+id VARCHAR(50) FK >- Earthquake.id
+time timestamp
+date date
+lastupddatetime timestamp
+-

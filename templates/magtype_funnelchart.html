@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Depth vs Magnitude</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="../static/css/fc_style.css">
+</head>
+
+<body>
+<!-- NAVBAR CODE -->
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="navbar-header">
+    
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    </button>
+
+    <a class="navbar-brand" href="index.html">Homepage</a>
+</div>
+
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+        <li class="nav-link"><a href="globe.html">Global Earthquakes<span class="sr-only">(current)</span></a></li>
+        <li><a href="depth_line_chart.html">Depth vs Magnitude</a></li>
+        <li><a href="magtype_funnelchart.html">Earthquakes by Magnitude Type</a></li>
+        <li><a href="statistics.html">Depth Predictor</a></li>
+    </ul>
+</div>  
+</div>  
+</nav>
+
+<!-- The div that holds our chart -->
+<div id="chartdiv"></div>
+
+<!-- D3 JavaScript -->
+<!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
+
+<!-- Apex Charts -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
+
+<!-- Our JavaScript -->
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+<script type="text/javascript" src="../static/js/magtype_funnelchart.js"></script>
+
+
+
+<table border="1" style="margin-left:auto;margin-right:auto;max-width: 1500px">
+    <thead>
+        <tr>
+            <th>Magnitude Types</th>
+            <th>Magnitude Range</th>
+            <th>Distance Range</th>
+            <th>Equation</th>
+            <th>Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>ML Ml, or ml (local)</th>
+            <td>~2.0 to ~6.5</td>
+            <td>0 - 600 km</td>
+            <td>ML=log(𝐴)−log𝐴0+𝑆</td>
+            <td>The original magnitude relationship defined by Richter and Gutenberg in 1935 for local earthquakes.
+                It is based on the maximum amplitude of a seismogram recorded on a Wood-Anderson torsion seismograph.
+                Although these instruments are no longer widely in use, ML values are calculated using modern instrumentation with appropriate adjustments.
+                Reported by NEIC for all earthquakes in the US and Canada. Only authoritative for smaller events,
+                typically Magnitudes greater than 4.0 for which there is no mb or moment magnitude.
+                In the central and eastern United States, NEIC also computes ML, but restricts the distance range to 0-150 km.
+                In that area it is only authoritative if there is no mb_Lg as well as no mb or moment magnitude.</td>
+            </tr>
+            <tr>
+                <th>Md or md (duration)</th>
+                <td>~4 or smaller</td>
+                <td>0 - 400 km</td>
+                <td>-</td>
+                <td>Based on the duration of shaking as measured by the time decay of the amplitude of the seismogram.
+                    Sometimes the only magnitude available for very small events,
+                    but often used (especially in the past) to compute magnitude from seismograms with "clipped" waveforms due to limited dynamic
+                    recording range of analog instrumentation, which makes it impossible to measure peak amplitudes.
+                    Computed by NEIC but only published when there is no other magnitude available.</td>
+            </tr>
+            <tr>
+                <th>mb (short-period body wave)</th>
+                <td>~4.0 to ~6.5</td>
+                <td>15 - 100 degrees</td>
+                <td>mb = log10(A/T) + Q(D,h) ,
+                    where A is the amplitude of ground motion (in microns);
+                    T is the corresponding period (in seconds); and Q(D,h) is a correction factor that is a function of distance, D(degrees),
+                    between epicenter and station and focal depth, h (in kilometers), of the earthquake.</td>
+                <td>Based on the amplitude of 1st arriving P-waves at periods of about 1 s.
+                    Waveforms are shaped to the WWSSN SP response.
+                    Reported for most M4.0-4.5 to 6.5 EQs that are observed teleseismically.
+                    Only authoritative for global seismicity for which there is no Mww, Mwc, Mwb or Mwr, typically 4.0-5.5 range.
+                    Mb tends to saturate at about M 6.5 or larger.</td>
+            </tr>
+            <tr>
+                <th>Mww  (Moment W-phase)(generic notation Mw)</th>
+                <td>~5.0 and larger</td>
+                <td>1 - 90  degrees</td>
+                <td>MW = 2/3 * (log10(MO) - 16.1),
+                    where MO is the seismic moment.  
+                    Note this is also unit-dependent; the formula above is for moment in dyne-cm.
+                    If using metric units (N.m), the constant is 9.1.</td>
+                <td>Derived from a centroid moment tensor inversion of the W-phase (~50-2000 s; pass band based on size of EQ).
+                    Computed for all M5.0 or larger earthquakes worldwide, but generally robust for all M5.5 worldwide.
+                    Provides consistent results to M~4.5 within a regional network of high-quality broadband stations.
+                    Authoritative USGS magnitude if computed.</td>
+            </tr>
+            <tr>
+                <th>Mwr (regional)</th>
+                <td>~4.0 to ~6.5</td>
+                <td>0 - 10  degrees</td>
+                <td>MW = 2/3 * (log10(MO) - 16.1), where MO is the seismic moment.</td>
+                <td>$Based on the scalar seismic-moment of the earthquake, derived from moment tensor inversion of the whole seismogram
+                    at regional distances (~10-100 s; pass band based on size of EQ).
+                    Source complexity and dimensions at larger magnitudes (~M7.0 or greater) generally limits applicability.
+                    Authoritative for Magnitudes of 5.0 or greater. Within the continental US and south-central Alaska where we have a large number of
+                    high quality broadband stations we expect we can compute an Mwr consistently for events as small as M4.0.
+                    In some areas of the country, with relatively dense broadband coverage, we can compute Mwr consistently to as small as M3.5.</td>
+            </tr>
+            <tr>
+                <th>Mw (The moment magnitude (Mw) scale)</th>
+                <td>Scales 1-3 have limited range and applicability and do not satisfactorily measure the size of the largest earthquakes</td>
+                <td>-</td>
+                <td>-</td>
+                <td>Based on the concept of seismic moment, is uniformly applicable to all sizes of earthquakes but is more difficult to compute than the other types. All magnitude scales should yield approximately the same value for any given earthquake.
+                </td>
+            </tr>
+            <tr>
+                <th>mb_Lg, mb_lg, or MLg (short-period surface wave)</th>
+                <td>~3.5 to ~7.0</td>
+                <td>150 – 1110 km (10 degres)</td>
+                <td>-</td>
+                <td>A magnitude for regional earthquakes based on the amplitude of the Lg surface waves as recorded on short-period instruments.
+                    Only authoritative for smaller events in the central and eastern United States,
+                    typically Magnitudes of 4.0 or greater for which there is no mb or moment magnitude.</td>
+            </tr>
+            <tr>
+                <th>Mh</th>
+                <td>any</td>
+                <td>any</td>
+                <td>N/A</td>
+                <td>Non-standard magnitude method. Generally used when standard methods will not work.
+                    Sometimes use as a temporary designation until the magnitude is finalized.</td>
+            </tr>
+            <tr>
+                <th>Mwb (body wave)</th>
+                <td>~5.5 to ~7.0</td>
+                <td>30 - 90  degrees</td>
+                <td>MW = 2/3 * (log10(MO) - 16.1), where MO is the seismic moment.</td>
+                <td>Derived from moment tensor inversion of long-period (~20-200 s; pass band based on size of EQ) body-waves (P- and SH).
+                    Generally computable for all M5.5 or larger events worldwide.
+                    Source complexity at larger magnitudes (~M7.5 or greater) generally limits applicability.
+                    Only authoritative if Mww and Mwc are not computed.</td>
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+    <br/>
+    <br/>
+
+</body>
+
+</html>
